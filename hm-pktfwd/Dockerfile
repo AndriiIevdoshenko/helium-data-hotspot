@@ -42,11 +42,11 @@ COPY buildfiles buildfiles
 COPY sx1302fixes sx1302fixes
 
 # Clone the lora gateway and packet forwarder repos
-RUN git clone https://github.com/NebraLtd/lora_gateway.git
-RUN git clone https://github.com/NebraLtd/packet_forwarder.git
+RUN git clone https://github.com/Lora-net/lora_gateway.git
+RUN git clone https://github.com/Lora-net/packet_forwarder.git
 
 # Download original Lora Gateway SPI source
-RUN wget -O lora_gateway/libloragw/src/loragw_spi.native.c.template https://raw.githubusercontent.com/Lora-net/lora_gateway/master/libloragw/src/loragw_spi.native.c
+RUN wget -O lora_gateway/libloragw/src/loragw_spi.native.c.template https://raw.githubusercontent.com/Lora-net/lora_gateway/tree/master/libloragw/src/loragw_spi.native.c
 RUN cp lora_gateway/libloragw/src/loragw_spi.native.c.template lora_gateway/libloragw/src/loragw_spi.native.c
 
 # Create folder needed by packetforwarder compiler
@@ -89,11 +89,11 @@ RUN apt-get update && \
 COPY --from=builder /opt/iotloragateway/packetforwarder .
 
 # Copy sx1301 regional config templates
-COPY lora_templates_sx1301 lora_templates_sx1301/
+COPY lora_templates_sx1301 /lora_templates_sx1301/
 
 # Use EU config as initial default
-COPY lora_templates_sx1301/local_conf.json local_conf.json
-COPY lora_templates_sx1301/EU-global_conf.json global_conf.json
+COPY lora_templates_sx1301/local_conf.json /local_conf.json
+COPY lora_templates_sx1301/EU-global_conf.json /global_conf.json
 
 # Move to sx1302 directory
 WORKDIR /opt/iotloragateway/packet_forwarder/sx1302
@@ -102,11 +102,11 @@ WORKDIR /opt/iotloragateway/packet_forwarder/sx1302
 COPY --from=builder /opt/iotloragateway/dev/sx1302_hal-1.0.5 .
 
 # Copy sx1302 regional config templates
-COPY lora_templates_sx1302 lora_templates_sx1302/
+COPY lora_templates_sx1302 /lora_templates_sx1302/
 
 # Use EU config as initial default
-COPY lora_templates_sx1302/local_conf.json packet_forwarder/local_conf.json
-COPY lora_templates_sx1302/EU-global_conf.json packet_forwarder/global_conf.json
+COPY lora_templates_sx1302/local_conf.json /packet_forwarder/local_conf.json
+COPY lora_templates_sx1302/EU-global_conf.json /packet_forwarder/global_conf.json
 
 # Move to main packet forwarder directory and copy source code
 WORKDIR /opt/iotloragateway/packet_forwarder
