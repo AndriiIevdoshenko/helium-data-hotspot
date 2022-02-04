@@ -22,6 +22,7 @@ ENV PATH="/opt/iotloragateway/dev/venv/bin:$PATH"
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         automake \
+        apt-utils \
         libtool \
         autoconf \
         git \
@@ -46,7 +47,7 @@ RUN git clone https://github.com/Lora-net/lora_gateway.git
 RUN git clone https://github.com/Lora-net/packet_forwarder.git
 
 # Download original Lora Gateway SPI source
-RUN wget -O lora_gateway/libloragw/src/loragw_spi.native.c.template https://raw.githubusercontent.com/Lora-net/lora_gateway/tree/master/libloragw/src/loragw_spi.native.c
+RUN wget -O lora_gateway/libloragw/src/loragw_spi.native.c.template https://github.com/Lora-net/lora_gateway/blob/master/libloragw/src/loragw_spi.native.c
 RUN cp lora_gateway/libloragw/src/loragw_spi.native.c.template lora_gateway/libloragw/src/loragw_spi.native.c
 
 # Create folder needed by packetforwarder compiler

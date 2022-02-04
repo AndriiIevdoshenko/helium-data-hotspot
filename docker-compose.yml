@@ -67,11 +67,9 @@ services:
     build: ./gateway-config
     restart: always
     environment:
-      - 'DBUS_SYSTEM_BUS_ADDRESS=tcp:host=dbus,port=55884'
-      # The system bus forbids a lot of actions by default, use the session
-      # bus config instead
-     - 'DBUS_SESSION_BUS_ADDRESS=tcp:host=dbus,port=55884'
-     - 'DBUS_SYSTEM_BUS_ADDRESS=tcp:host=dbus,port=55887'
+    - 'DBUS_SYSTEM_BUS_ADDRESS=tcp:host=dbus,port=55884'
+    - 'DBUS_SESSION_BUS_ADDRESS=tcp:host=dbus,port=55884'
+    #- 'DBUS_SYSTEM_BUS_ADDRESS=tcp:host=dbus,port=55887'
     volumes:
       - 'dbus-config:/mnt/dbus-config'
     depends_on:
