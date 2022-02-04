@@ -54,17 +54,24 @@ RUN cp lora_gateway/libloragw/src/loragw_spi.native.c.template lora_gateway/libl
 RUN mkdir -p /opt/iotloragateway/packetforwarder
 
 # Compile for sx1301 concentrator on all the necessary SPI buses
-RUN ./buildfiles/compileSX1301.sh spidev0.0
-RUN ./buildfiles/compileSX1301.sh spidev0.1
-RUN ./buildfiles/compileSX1301.sh spidev1.0
-RUN ./buildfiles/compileSX1301.sh spidev1.1
-RUN ./buildfiles/compileSX1301.sh spidev1.2
-RUN ./buildfiles/compileSX1301.sh spidev2.0
-RUN ./buildfiles/compileSX1301.sh spidev2.1
-RUN ./buildfiles/compileSX1301.sh spidev32766.0
+CD buildfiles
+RUN chmod +x ./compileSX1301.sh 
+RUN chmod +x ./compileSX1302.sh
+
+
+
+
+RUN ./compileSX1301.sh spidev0.0
+RUN ./compileSX1301.sh spidev0.1
+RUN ./compileSX1301.sh spidev1.0
+RUN ./compileSX1301.sh spidev1.1
+RUN ./compileSX1301.sh spidev1.2
+RUN ./compileSX1301.sh spidev2.0
+RUN ./compileSX1301.sh spidev2.1
+RUN ./compileSX1301.sh spidev32766.0
 
 # Compile for sx1302 concentrator
-RUN ./buildfiles/compileSX1302.sh
+RUN ./compileSX1302.sh
 
 # No need to cleanup the builder
 
